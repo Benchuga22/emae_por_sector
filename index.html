@@ -37,9 +37,13 @@ h1{margin:0;font-size:25px;font-weight:600;letter-spacing:-.015em;font-stretch:9
 header .sub{color:var(--ink2);font-size:14px;font-stretch:92%}
 header .stamp{margin-left:auto;color:var(--ink2);font-size:13px}
 header .stamp b{color:var(--ink);font-weight:600}
+.langbtn{align-self:center;border:1px solid var(--rule);background:var(--panel);
+  color:var(--ink2);font-size:12px;font-weight:600;font-stretch:90%;letter-spacing:.03em;
+  padding:5px 12px;border-radius:2px;flex:none}
+.langbtn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
 
 /* ── grilla ───────────────────────────────────── */
-.grid{display:grid;grid-template-columns:268px minmax(0,1fr);gap:22px;margin-top:20px}
+.grid{display:grid;grid-template-columns:340px minmax(0,1fr);gap:22px;margin-top:20px}
 @media (max-width:900px){
   .grid{grid-template-columns:1fr}
   .main{order:1} .rail{order:2}
@@ -52,18 +56,32 @@ header .stamp b{color:var(--ink);font-weight:600}
 .rail h2{margin:0;padding:11px 13px 9px;font-size:13px;font-weight:600;color:var(--ink2);
   border-bottom:1px solid var(--rule-soft);font-stretch:92%}
 .rail .sortbtn{float:right;font-size:12px;color:var(--serie);font-weight:500}
-.item{display:grid;grid-template-columns:15px 1fr 62px 46px;align-items:center;gap:8px;
-  width:100%;padding:7px 13px;text-align:left;border-bottom:1px solid var(--rule-soft)}
+/* encabezado de las tres columnas de variación */
+.rail .head{display:grid;grid-template-columns:1fr 46px 46px 46px;gap:7px;
+  padding:6px 13px 5px;border-bottom:1px solid var(--rule);
+  font-size:10px;color:var(--ink3);font-stretch:84%;text-transform:uppercase;letter-spacing:.02em}
+.rail .head span{text-align:center}
+.rail .head .lead{text-align:left}
+.rail .head button{font:inherit;color:var(--ink3);text-transform:uppercase;letter-spacing:.02em;
+  padding:0;text-align:center}
+.rail .head button.lead{text-align:left}
+.rail .head button[aria-pressed="true"]{color:var(--serie);font-weight:700}
+.item{display:grid;grid-template-columns:1fr 46px 46px 46px;align-items:center;gap:7px;
+  width:100%;padding:8px 13px;text-align:left;border-bottom:1px solid var(--rule-soft)}
 .item:last-child{border-bottom:none}
 .item:hover{background:#f4f8fa}
 .item[aria-current="true"]{background:var(--ink);color:#fff}
 .item[aria-current="true"] .nm,.item[aria-current="true"] .cd{color:#fff}
-.item .cd{font-size:11px;font-weight:600;color:var(--ink3);font-stretch:88%}
-.item .nm{font-size:12.5px;line-height:1.22;font-stretch:88%;
+.item .lead{min-width:0;display:flex;align-items:baseline;gap:6px}
+.item .cd{font-size:11px;font-weight:600;color:var(--ink3);font-stretch:88%;flex:none;width:12px}
+.item[aria-current="true"] .cd{color:#cdd7dd}
+.item .nm{font-size:12px;line-height:1.2;font-stretch:86%;
   overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.item .yy{font-size:12px;text-align:right;font-weight:600;font-stretch:88%}
+.item .d{font-size:12px;text-align:center;font-weight:600;font-stretch:86%;font-variant-numeric:tabular-nums}
 .item.gen{border-bottom:2px solid var(--ink)}
-.item.gen .nm{font-weight:600;font-size:13px}
+.item.gen .nm{font-weight:600;font-size:12.5px}
+.item[aria-current="true"] .d.pos{color:#5fd0a0}
+.item[aria-current="true"] .d.neg{color:#f0899a}
 
 /* ── panel principal ──────────────────────────── */
 .main{background:var(--panel);border:1px solid var(--rule);padding:18px 20px 12px;min-width:0}
@@ -102,8 +120,18 @@ figure{margin:6px 0 0}
 .hoverbar b{color:var(--ink);font-weight:600}
 
 /* ── pie ──────────────────────────────────────── */
+.about{margin-top:26px;padding:20px 24px;background:var(--panel);border:1px solid var(--rule);
+  border-left:3px solid var(--serie)}
+.about h3{margin:0 0 9px;font-size:16px;color:var(--ink);font-weight:600;font-stretch:94%;letter-spacing:-.01em}
+.about p{margin:0 0 10px;font-size:13.5px;color:var(--ink2);line-height:1.62}
+.about p:last-child{margin-bottom:0}
+.about b{color:var(--ink);font-weight:600}
 .notes{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px 34px;
   font-size:12.5px;color:var(--ink2);line-height:1.55}
+.contact{margin-top:26px;padding-top:16px;border-top:1px solid var(--rule);
+  text-align:center;font-size:13px;color:var(--ink2);font-stretch:92%}
+.contact a{color:var(--serie);font-weight:600;text-decoration:none;margin-left:4px}
+.contact a:hover{text-decoration:underline}
 .notes h3{margin:0 0 5px;font-size:13px;color:var(--ink);font-weight:600;font-stretch:92%}
 .notes p{margin:0 0 8px}
 .notes a{color:var(--serie)}
@@ -119,15 +147,22 @@ figure{margin:6px 0 0}
 <div class="wrap">
 
 <header>
-  <h1>EMAE por sector de actividad</h1>
-  <span class="sub">Tendencia-ciclo, serie desestacionalizada y serie original</span>
-  <span class="stamp">Último dato <b id="stampDate">jun 2026</b> · <span id="stampRange">42 meses</span></span>
+  <h1 data-i18n="title">EMAE por sector de actividad</h1>
+  <span class="sub" data-i18n="subtitle">Tendencia-ciclo, serie desestacionalizada y serie original</span>
+  <span class="stamp"><span data-i18n="lastData">Último dato</span> <b id="stampDate">jun 2026</b> · <span id="stampRange">42 meses</span></span>
+  <button class="langbtn" id="langBtn" type="button" aria-label="Switch to English">EN</button>
 </header>
 
 <div class="grid">
 
   <nav class="rail" aria-label="Sectores">
-    <h2>Sector <button class="sortbtn" id="sortBtn" type="button">ordenar por i.a.</button></h2>
+    <h2 data-i18n="railTitle">Sectores de actividad</h2>
+    <div class="head">
+      <button type="button" class="lead" data-sort="def" aria-pressed="true" data-i18n="colSector">Sector</button>
+      <button type="button" data-sort="ytd" data-i18n="colYtd" data-i18n-title="ttYtd" title="Acumulado del año contra igual período del año anterior">YTD</button>
+      <button type="button" data-sort="milei" data-i18n="colMilei" data-i18n-title="ttMilei" title="Tendencia-ciclo de junio 2026 contra noviembre 2023 (inicio de la gestión Milei)">Milei</button>
+      <button type="button" data-sort="ia" data-i18n="colIa" data-i18n-title="ttIa" title="Variación respecto a igual mes del año anterior">i.a.</button>
+    </div>
     <div id="rail"></div>
   </nav>
 
@@ -141,59 +176,104 @@ figure{margin:6px 0 0}
 
     <div class="controls">
       <div class="seg" role="group" aria-label="Serie a mostrar">
-        <button type="button" data-serie="tc">Tendencia-ciclo</button>
-        <button type="button" data-serie="sa">Desestacionalizada</button>
-        <button type="button" data-serie="orig">Original</button>
-        <button type="button" data-serie="yoy">Variación i.a.</button>
+        <button type="button" data-serie="tc" data-i18n="serTc">Tendencia-ciclo</button>
+        <button type="button" data-serie="sa" data-i18n="serSa">Desestacionalizada</button>
+        <button type="button" data-serie="orig" data-i18n="serOrig">Original</button>
+        <button type="button" data-serie="yoy" data-i18n="serYoy">Variación i.a.</button>
       </div>
       <div class="seg" role="group" aria-label="Período">
-        <button type="button" data-rango="0">2004-hoy</button>
-        <button type="button" data-rango="120">10 años</button>
-        <button type="button" data-rango="60">5 años</button>
-        <button type="button" data-rango="36">3 años</button>
+        <button type="button" data-rango="0" data-i18n="rangeAll">2004-hoy</button>
+        <button type="button" data-rango="120" data-i18n="range10">10 años</button>
+        <button type="button" data-rango="60" data-i18n="range5">5 años</button>
+        <button type="button" data-rango="36" data-i18n="range3">3 años</button>
       </div>
-      <label class="chk"><input type="checkbox" id="cmpChk" checked> Comparar con el EMAE general</label>
-      <label class="chk"><input type="checkbox" id="baseChk"> Base primer mes = 100</label>
-      <label class="chk"><input type="checkbox" id="presChk" checked> Cambios de gobierno</label>
+      <label class="chk"><input type="checkbox" id="cmpChk" checked> <span data-i18n="chkCmp">Comparar con el EMAE general</span></label>
+      <label class="chk"><input type="checkbox" id="baseChk"> <span data-i18n="chkBase">Base primer mes = 100</span></label>
+      <label class="chk"><input type="checkbox" id="presChk" checked> <span data-i18n="chkPres">Cambios de gobierno</span></label>
     </div>
 
     <figure>
       <svg class="chart" id="chart" role="img" aria-label="Evolución del índice"></svg>
       <div class="legend" id="legend"></div>
-      <figcaption class="hoverbar" id="hover">Pasá el cursor sobre el gráfico para leer mes a mes.</figcaption>
+      <figcaption class="hoverbar" id="hover" data-i18n="hoverHint">Pasá el cursor sobre el gráfico para leer mes a mes.</figcaption>
     </figure>
   </section>
 </div>
 
+<section class="about">
+  <h3 data-i18n="aboutTitle">Qué es el EMAE</h3>
+  <div id="aboutBody">
+  <p>El Estimador Mensual de Actividad Económica es el termómetro de corto plazo de la economía argentina.
+     Combina la evolución de dieciséis sectores productivos en un único índice y lo publica todos los meses, con
+     un rezago de alrededor de cincuenta días. En los hechos funciona como un anticipo del Producto Interno Bruto:
+     mientras que el PIB se conoce recién cada tres meses y con bastante demora, el EMAE ofrece una lectura mensual
+     construida con la misma lógica de cuentas nacionales, así que sirve para tomarle el pulso a la actividad sin
+     esperar al dato trimestral.</p>
+  <p><b>Su principal virtud es la oportunidad.</b> Permite ver rápido si la economía se está expandiendo o
+     contrayendo, detectar puntos de inflexión y seguir cada sector por separado —agro, industria, comercio,
+     construcción y demás— para entender qué está traccionando y qué está frenando. Al descontar el efecto
+     estacional y aislar la tendencia-ciclo, deja ver el movimiento de fondo por debajo del vaivén propio de cada
+     mes (la cosecha, las fiestas, la temporada de pesca).</p>
+  <p><b>Sus límites conviene tenerlos presentes.</b> Es una estimación preliminar, no una medición definitiva: los
+     últimos meses se revisan cuando entran datos más completos, y una lectura puede cambiar de signo en
+     publicaciones posteriores. No es exactamente el PIB —usa ponderaciones fijas de una estructura económica de
+     hace años y no capta todos sus componentes con la misma finura—, así que su nivel puede separarse del dato
+     trimestral. Y como todo índice, resume: un buen número general puede esconder sectores en caída, y por eso
+     mirar la apertura por rama, como en este panel, suele decir más que el titular.</p>
+  </div>
+</section>
+
 <div class="notes">
   <div>
-    <h3>De dónde sale cada serie</h3>
+    <h3 data-i18n="n1Title">Las tres columnas del panel</h3>
+    <div id="n1Body">
+    <p><b>YTD</b> es el acumulado del año contra igual período del año anterior: el promedio de enero a junio de
+       2026 frente al mismo tramo de 2025, la misma medida que informa el INDEC. <b>Milei</b> compara la
+       tendencia-ciclo del último mes contra la de noviembre de 2023, el último mes completo antes del cambio de
+       gestión, para medir el trayecto desde entonces sin ruido estacional. <b>i.a.</b> es la variación
+       interanual: el último mes contra el mismo mes del año anterior. Tocá cualquiera de los tres títulos para
+       ordenar los sectores por esa columna.</p>
+    </div>
+  </div>
+  <div>
+    <h3 data-i18n="n2Title">De dónde sale cada serie</h3>
+    <div id="n2Body">
     <p>Las series originales y las variaciones interanuales, del nivel general y de los dieciséis sectores,
        salen de las planillas oficiales del INDEC: 270 meses desde enero de 2004, con precisión completa.
        El INDEC publica tendencia-ciclo y serie desestacionalizada <em>solo para el nivel general</em>, así que
        las versiones por sector las calcula la página: descomposición multiplicativa con media móvil 2×12,
        factores estacionales móviles (suavizado 3×3 por mes calendario, con acotado de valores extremos) y
        suavizado Henderson de 23 términos seguido de uno de 13.</p>
+    </div>
   </div>
   <div>
-    <h3>Qué tan bien reproduce al INDEC</h3>
-    <p>El mismo cálculo aplicado al nivel general, donde sí hay dato oficial para comparar:</p>
+    <h3 data-i18n="n3Title">Qué tan bien reproduce al INDEC</h3>
+    <p data-i18n="n3Lead">El mismo cálculo aplicado al nivel general, donde sí hay dato oficial para comparar:</p>
     <div class="fitbar"><span class="num" id="fitMaeN">—</span>
-      <span>puntos de índice de error medio contra la tendencia-ciclo publicada,<br>sobre un índice que se mueve entre 90 y 165</span></div>
+      <span id="fitCaption">puntos de índice de error medio contra la tendencia-ciclo publicada,<br>sobre un índice que se mueve entre 90 y 165</span></div>
+    <div id="n3Body">
     <p>Ese número deja afuera 2020 y 2021. Incluyéndolos el error medio sube a <b id="fitMae">—</b> y el máximo
        llega a <b id="fitMax">—</b>, en plena caída de la pandemia: ahí el INDEC aplicó correcciones por valores
        atípicos que un filtro fijo no reproduce. Fuera de ese tramo el ajuste es parejo, 0,41 en 2004-2019 y
        0,43 en 2022-2026.</p>
     <p>Los últimos 3 a 4 meses de cualquier tendencia-ciclo se revisan cuando entran datos nuevos. Leelos como
        provisorios, acá y en el informe oficial.</p>
+    </div>
   </div>
   <div>
-    <h3>Datos y actualización</h3>
+    <h3 data-i18n="n4Title">Datos y actualización</h3>
+    <div id="n4Body">
     <p>Los 270 meses, desde enero de 2004 hasta junio de 2026, están embebidos en la página:
        funciona sin conexión y no depende de ningún servidor.</p>
     <p style="margin-top:9px">Fuente: INDEC, Dirección Nacional de Cuentas Nacionales. Informe técnico Vol.&nbsp;10 n°&nbsp;201.</p>
+    </div>
   </div>
 </div>
+
+<footer class="contact">
+  <span data-i18n="contact">Consultas o feedback:</span>
+  <a href="mailto:benjamingomezalonso@gmail.com">benjamingomezalonso@gmail.com</a>
+</footer>
 
 </div>
 
@@ -201,8 +281,214 @@ figure{margin:6px 0 0}
 /* ══════════════════════════════════════════════════════════════
    DATOS — INDEC, EMAE. Ene 2023 a Jun 2026, índice base 2004=100
    ══════════════════════════════════════════════════════════════ */
-const MESES=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+const MESES_ES=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+const MESES_EN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+let MESES=MESES_ES;
 const INI=[2004,1];
+
+/* ══════════════════════════════════════════════════════════════
+   TRADUCCIONES
+   ══════════════════════════════════════════════════════════════ */
+let LANG="es";
+const I18N={
+  es:{
+    title:"EMAE por sector de actividad",
+    subtitle:"Tendencia-ciclo, serie desestacionalizada y serie original",
+    lastData:"Último dato",
+    railTitle:"Sectores de actividad",
+    colSector:"Sector", colYtd:"YTD", colMilei:"Milei", colIa:"i.a.",
+    ttYtd:"Acumulado del año contra igual período del año anterior",
+    ttMilei:"Tendencia-ciclo del último mes contra noviembre 2023 (inicio de la gestión Milei)",
+    ttIa:"Variación respecto a igual mes del año anterior",
+    serTc:"Tendencia-ciclo", serSa:"Desestacionalizada", serOrig:"Original", serYoy:"Variación i.a.",
+    rangeAll:"2004-hoy", range10:"10 años", range5:"5 años", range3:"3 años",
+    chkCmp:"Comparar con el EMAE general", chkBase:"Base primer mes = 100", chkPres:"Cambios de gobierno",
+    hoverHint:"Pasá el cursor sobre el gráfico para leer mes a mes.",
+    aboutTitle:"Qué es el EMAE",
+    n1Title:"Las tres columnas del panel",
+    n2Title:"De dónde sale cada serie",
+    n3Title:"Qué tan bien reproduce al INDEC",
+    n3Lead:"El mismo cálculo aplicado al nivel general, donde sí hay dato oficial para comparar:",
+    fitCaption:"puntos de índice de error medio contra la tendencia-ciclo publicada,<br>sobre un índice que se mueve entre 90 y 165",
+    n4Title:"Datos y actualización",
+    contact:"Consultas o feedback:",
+    genName:"EMAE nivel general", emae:"EMAE",
+    // KPIs
+    kpiIndex:"Índice tendencia-ciclo", kpiTc:"Tendencia-ciclo vs. mes anterior",
+    kpiSa:"Desestacionalizada vs. mes anterior", kpiIa:"Serie original vs. igual mes del año anterior",
+    kpiAcum:"Acumulado del año", base100:"2004=100",
+    // leyenda / hover
+    lgTc:"Tendencia-ciclo", lgSa:"Serie desestacionalizada", lgOrig:"Serie original", lgYoy:"Variación interanual",
+    lgOwn:" (cálculo propio)", lgIndec:" (INDEC)", lgOrigShort:"Serie original",
+    lgPres:"Asunción presidencial", lgBand:"Franja gris: meses sujetos a revisión",
+    hvLast:"Último dato · ", hvTc:"Tendencia-ciclo", hvSa:"Desestacionalizada", hvOrig:"Original", hvIa:"Var. i.a.",
+    months:"meses", monthsFrom:"meses desde", pts:" puntos",
+    langBtn:"EN", langAria:"Switch to English"
+  },
+  en:{
+    title:"EMAE by economic sector",
+    subtitle:"Trend-cycle, seasonally adjusted and original series",
+    lastData:"Latest data",
+    railTitle:"Sectors of activity",
+    colSector:"Sector", colYtd:"YTD", colMilei:"Since Milei", colIa:"YoY",
+    ttYtd:"Year-to-date versus the same period a year earlier",
+    ttMilei:"Latest month's trend-cycle versus November 2023 (start of the Milei administration)",
+    ttIa:"Change versus the same month a year earlier",
+    serTc:"Trend-cycle", serSa:"Seasonally adj.", serOrig:"Original", serYoy:"YoY change",
+    rangeAll:"2004-now", range10:"10 years", range5:"5 years", range3:"3 years",
+    chkCmp:"Compare with the overall EMAE", chkBase:"Rebase first month = 100", chkPres:"Changes of government",
+    hoverHint:"Hover over the chart to read month by month.",
+    aboutTitle:"What the EMAE is",
+    n1Title:"The panel's three columns",
+    n2Title:"Where each series comes from",
+    n3Title:"How closely it matches INDEC",
+    n3Lead:"The same calculation applied to the overall level, where an official figure exists to compare against:",
+    fitCaption:"index points of mean error against the published trend-cycle,<br>on an index that ranges between 90 and 165",
+    n4Title:"Data and updates",
+    contact:"Questions or feedback:",
+    genName:"Overall EMAE", emae:"EMAE",
+    kpiIndex:"Trend-cycle index", kpiTc:"Trend-cycle vs. previous month",
+    kpiSa:"Seasonally adjusted vs. previous month", kpiIa:"Original series vs. same month a year earlier",
+    kpiAcum:"Year-to-date", base100:"2004=100",
+    lgTc:"Trend-cycle", lgSa:"Seasonally adjusted series", lgOrig:"Original series", lgYoy:"Year-on-year change",
+    lgOwn:" (own calculation)", lgIndec:" (INDEC)", lgOrigShort:"Original series",
+    lgPres:"Presidential inauguration", lgBand:"Grey band: months subject to revision",
+    hvLast:"Latest data · ", hvTc:"Trend-cycle", hvSa:"Seas. adj.", hvOrig:"Original", hvIa:"YoY",
+    months:"months", monthsFrom:"months from", pts:" points",
+    langBtn:"ES", langAria:"Cambiar a español"
+  }
+};
+let T=I18N.es;
+
+/* nombres de sectores en ambos idiomas, en el orden de SECTORES */
+const SECTORES_EN=[
+ "Agriculture, livestock, hunting and forestry","Fishing","Mining and quarrying",
+ "Manufacturing","Electricity, gas and water","Construction",
+ "Wholesale, retail trade and repairs","Hotels and restaurants","Transport and communications",
+ "Financial intermediation","Real estate, business and rental activities",
+ "Public administration and defence; compulsory social security","Education",
+ "Social and health services","Other community, social and personal service activities",
+ "Taxes net of subsidies"
+];
+
+/* textos largos (about y notas) por idioma, como HTML */
+const LONG={
+  es:{
+    aboutBody:`<p>El Estimador Mensual de Actividad Económica es el termómetro de corto plazo de la economía argentina.
+       Combina la evolución de dieciséis sectores productivos en un único índice y lo publica todos los meses, con
+       un rezago de alrededor de cincuenta días. En los hechos funciona como un anticipo del Producto Interno Bruto:
+       mientras que el PIB se conoce recién cada tres meses y con bastante demora, el EMAE ofrece una lectura mensual
+       construida con la misma lógica de cuentas nacionales, así que sirve para tomarle el pulso a la actividad sin
+       esperar al dato trimestral.</p>
+    <p><b>Su principal virtud es la oportunidad.</b> Permite ver rápido si la economía se está expandiendo o
+       contrayendo, detectar puntos de inflexión y seguir cada sector por separado —agro, industria, comercio,
+       construcción y demás— para entender qué está traccionando y qué está frenando. Al descontar el efecto
+       estacional y aislar la tendencia-ciclo, deja ver el movimiento de fondo por debajo del vaivén propio de cada
+       mes (la cosecha, las fiestas, la temporada de pesca).</p>
+    <p><b>Sus límites conviene tenerlos presentes.</b> Es una estimación preliminar, no una medición definitiva: los
+       últimos meses se revisan cuando entran datos más completos, y una lectura puede cambiar de signo en
+       publicaciones posteriores. No es exactamente el PIB —usa ponderaciones fijas de una estructura económica de
+       hace años y no capta todos sus componentes con la misma finura—, así que su nivel puede separarse del dato
+       trimestral. Y como todo índice, resume: un buen número general puede esconder sectores en caída, y por eso
+       mirar la apertura por rama, como en este panel, suele decir más que el titular.</p>`,
+    n1Body:`<p><b>YTD</b> es el acumulado del año contra igual período del año anterior: el promedio de enero a junio de
+       2026 frente al mismo tramo de 2025, la misma medida que informa el INDEC. <b>Milei</b> compara la
+       tendencia-ciclo del último mes contra la de noviembre de 2023, el último mes completo antes del cambio de
+       gestión, para medir el trayecto desde entonces sin ruido estacional. <b>i.a.</b> es la variación
+       interanual: el último mes contra el mismo mes del año anterior. Tocá cualquiera de los tres títulos para
+       ordenar los sectores por esa columna.</p>`,
+    n2Body:`<p>Las series originales y las variaciones interanuales, del nivel general y de los dieciséis sectores,
+       salen de las planillas oficiales del INDEC: 270 meses desde enero de 2004, con precisión completa.
+       El INDEC publica tendencia-ciclo y serie desestacionalizada <em>solo para el nivel general</em>, así que
+       las versiones por sector las calcula la página: descomposición multiplicativa con media móvil 2×12,
+       factores estacionales móviles (suavizado 3×3 por mes calendario, con acotado de valores extremos) y
+       suavizado Henderson de 23 términos seguido de uno de 13.</p>`,
+    n3Body:`<p>Ese número deja afuera 2020 y 2021. Incluyéndolos el error medio sube a <b id="fitMae">—</b> y el máximo
+       llega a <b id="fitMax">—</b>, en plena caída de la pandemia: ahí el INDEC aplicó correcciones por valores
+       atípicos que un filtro fijo no reproduce. Fuera de ese tramo el ajuste es parejo, 0,41 en 2004-2019 y
+       0,43 en 2022-2026.</p>
+    <p>Los últimos 3 a 4 meses de cualquier tendencia-ciclo se revisan cuando entran datos nuevos. Leelos como
+       provisorios, acá y en el informe oficial.</p>`,
+    n4Body:`<p>Los 270 meses, desde enero de 2004 hasta junio de 2026, están embebidos en la página:
+       funciona sin conexión y no depende de ningún servidor.</p>
+    <p style="margin-top:9px">Fuente: INDEC, Dirección Nacional de Cuentas Nacionales. Informe técnico Vol.&nbsp;10 n°&nbsp;201.</p>`
+  },
+  en:{
+    aboutBody:`<p>The Monthly Economic Activity Estimator (EMAE, for its Spanish initials) is Argentina's short-term
+       economic thermometer. It combines the evolution of sixteen productive sectors into a single index and
+       publishes it every month, with a lag of about fifty days. In practice it works as a preview of Gross
+       Domestic Product: while GDP is only known quarterly and with considerable delay, the EMAE offers a monthly
+       reading built with the same national-accounts logic, so it lets you take the pulse of activity without
+       waiting for the quarterly figure.</p>
+    <p><b>Its main virtue is timeliness.</b> It shows quickly whether the economy is expanding or contracting,
+       flags turning points, and lets you follow each sector separately —agriculture, industry, trade,
+       construction and the rest— to understand what is pulling and what is dragging. By removing the seasonal
+       effect and isolating the trend-cycle, it reveals the underlying movement beneath each month's own swings
+       (the harvest, the holidays, the fishing season).</p>
+    <p><b>Its limits are worth keeping in mind.</b> It is a preliminary estimate, not a definitive measurement:
+       the most recent months are revised as fuller data arrives, and a reading can flip sign in later releases.
+       It is not exactly GDP —it uses fixed weights from an economic structure of years ago and does not capture
+       all of its components with the same precision— so its level can drift from the quarterly figure. And like
+       any index, it summarises: a good headline number can hide sectors in decline, which is why looking at the
+       sector breakdown, as in this panel, often says more than the headline.</p>`,
+    n1Body:`<p><b>YTD</b> is the year-to-date accumulation against the same period a year earlier: the average of
+       January to June 2026 versus the same stretch of 2025, the same measure INDEC reports. <b>Since Milei</b>
+       compares the latest month's trend-cycle against that of November 2023, the last full month before the
+       change of administration, to measure the path since then without seasonal noise. <b>YoY</b> is the
+       year-on-year change: the latest month against the same month a year earlier. Tap any of the three headers
+       to sort the sectors by that column.</p>`,
+    n2Body:`<p>The original series and the year-on-year changes, for the overall level and the sixteen sectors,
+       come from INDEC's official spreadsheets: 270 months since January 2004, at full precision. INDEC publishes
+       trend-cycle and seasonally adjusted series <em>only for the overall level</em>, so the sector versions are
+       computed by this page: multiplicative decomposition with a 2×12 moving average, moving seasonal factors
+       (3×3 smoothing per calendar month, with extreme values capped) and a 23-term Henderson filter followed by
+       a 13-term one.</p>`,
+    n3Body:`<p>That figure leaves out 2020 and 2021. Including them, the mean error rises to <b id="fitMae">—</b>
+       and the maximum reaches <b id="fitMax">—</b>, at the depth of the pandemic drop: there INDEC applied
+       outlier corrections that a fixed filter does not reproduce. Outside that stretch the fit is steady, 0.41 in
+       2004-2019 and 0.43 in 2022-2026.</p>
+    <p>The last 3 to 4 months of any trend-cycle are revised as new data arrives. Read them as provisional, here
+       and in the official report.</p>`,
+    n4Body:`<p>All 270 months, from January 2004 to June 2026, are embedded in the page: it works offline and
+       depends on no server.</p>
+    <p style="margin-top:9px">Source: INDEC, National Directorate of National Accounts. Technical report Vol.&nbsp;10 no.&nbsp;201.</p>`
+  }
+};
+
+function applyLang(lang){
+  LANG=lang; T=I18N[lang]; MESES=(lang==="en")?MESES_EN:MESES_ES;
+  document.documentElement.lang=lang;
+  // textos con data-i18n
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k=el.getAttribute("data-i18n"); if(T[k]!=null) el.innerHTML=T[k];
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach(el=>{
+    const k=el.getAttribute("data-i18n-title"); if(T[k]!=null) el.setAttribute("title",T[k]);
+  });
+  // caption del recuadro de ajuste (tiene <br>)
+  const fc=document.getElementById("fitCaption"); if(fc) fc.innerHTML=T.fitCaption;
+  // bloques largos
+  const L=LONG[lang];
+  for(const id of ["aboutBody","n1Body","n2Body","n3Body","n4Body"]){
+    const el=document.getElementById(id); if(el&&L[id]!=null) el.innerHTML=L[id];
+  }
+  // nombres de sector en el modelo
+  if(typeof MODEL!=="undefined"&&MODEL){
+    if(MODEL.series.GEN) MODEL.series.GEN.name=T.genName;
+    SECTORES.forEach(([c],j)=>{ if(MODEL.series[c]) MODEL.series[c].name=(lang==="en")?SECTORES_EN[j]:SECTORES[j][1]; });
+  }
+  // botón
+  const lb=document.getElementById("langBtn");
+  if(lb){ lb.textContent=T.langBtn; lb.setAttribute("aria-label",T.langAria); }
+  // sellos de fecha y rango, y re-render de todo lo dinámico
+  if(typeof MODEL!=="undefined"&&MODEL){
+    document.getElementById("stampDate").textContent=etiqueta(MODEL.n-1).toLowerCase();
+    document.getElementById("stampRange").textContent=MODEL.n+" "+T.monthsFrom+" "+etiqueta(0).toLowerCase();
+    mostrarAjuste();
+    render();
+  }
+}
+
 
 const SECTORES=[
  ["A","Agricultura, ganadería, caza y silvicultura"],
@@ -1140,12 +1426,12 @@ const PRESIDENCIAS=[
   {y:2023,m:12,n:"Milei"}
 ];
 
-let S={sec:"GEN", serie:"tc", cmp:true, base:false, sortYoy:false, hover:null, rango:120, pres:true};
+let S={sec:"GEN", serie:"tc", cmp:true, base:false, sort:null, hover:null, rango:120, pres:true};
 let MODEL=null;
 let HAS_GEN=true;                 // hay serie de nivel general alineada con la matriz sectorial
 const absMes=(y,m)=>y*12+(m-1);
 
-const nf=(v,d=1)=>v==null||!isFinite(v)?"—":v.toLocaleString("es-AR",{minimumFractionDigits:d,maximumFractionDigits:d});
+const nf=(v,d=1)=>v==null||!isFinite(v)?"—":v.toLocaleString(LANG==="en"?"en-US":"es-AR",{minimumFractionDigits:d,maximumFractionDigits:d});
 const pf=(v,d=1)=>v==null||!isFinite(v)?"—":(v>0?"+":"")+nf(v,d)+"%";
 const etiqueta=i=>{const[y,m]=INI, t=(m-1)+i; return MESES[t%12]+" "+(y+Math.floor(t/12));};
 
@@ -1157,7 +1443,7 @@ function build(){
     const g=GENERAL.map(r=>r[0]);
     const completa=g.every(v=>v!=null&&isFinite(v));
     const tieneTC=GENERAL.some(r=>r[4]!=null);
-    series.GEN={code:"GEN",name:"EMAE nivel general",orig:g,
+    series.GEN={code:"GEN",name:T.genName,orig:g,
       sa:GENERAL.map(r=>r[2]), tc:GENERAL.map(r=>r[4]), oficial:true,
       yoyOf:GENERAL.map(r=>r[1]), varSA:GENERAL.map(r=>r[3]), varTC:GENERAL.map(r=>r[5])};
     if(completa){
@@ -1179,12 +1465,26 @@ function build(){
   SECTORES.forEach(([c,nm],j)=>{
     const x=MATRIZ.map(r=>r[j]);
     const d=decompose(x,m0);
-    series[c]={code:c,name:nm,orig:x,sa:d.sa,tc:d.tc,oficial:false,
+    series[c]={code:c,name:(LANG==="en")?SECTORES_EN[j]:nm,orig:x,sa:d.sa,tc:d.tc,oficial:false,
       yoyOf: varOk?VARSEC.map(r=>r[j]):null};
   });
   Object.values(series).forEach(s=>{
     const calc=s.orig.map((v,i)=>i<12||s.orig[i-12]==null||v==null?null:(v/s.orig[i-12]-1)*100);
     s.yoy=s.yoyOf?s.yoyOf.map((v,i)=>v==null?calc[i]:v):calc;
+  });
+  // deltas para el riel: YTD (acumulado del año vs igual período del año anterior, serie original),
+  // Milei (tendencia-ciclo del último mes vs noviembre 2023) e i.a. del último mes
+  const last=n-1, mesLast=(m0-1+last)%12;
+  const iNov23=absMes(2023,11)-absMes(INI[0],INI[1]);
+  Object.values(series).forEach(s=>{
+    let a=0,b=0,ok=true;
+    for(let j=0;j<=mesLast;j++){
+      const cur=s.orig[last-j], prev=s.orig[last-j-12];
+      if(cur==null||prev==null){ok=false;break;} a+=cur; b+=prev;
+    }
+    s.dYtd = ok&&b?(a/b-1)*100:null;
+    s.dMilei = (iNov23>=0&&s.tc[iNov23]!=null&&s.tc[last]!=null)?(s.tc[last]/s.tc[iNov23]-1)*100:null;
+    s.dIa = s.yoy[last];
   });
   if(!series[S.sec]) S.sec=SECTORES[0][0];
   MODEL={n,series,fit:{mae,mx,maeN},keys:(series.GEN?["GEN"]:[]).concat(SECTORES.map(s=>s[0]))};
@@ -1193,40 +1493,27 @@ function build(){
 /* ══════════════════════════════════════════════════════════════
    RIEL DE SECTORES
    ══════════════════════════════════════════════════════════════ */
-function spark(v,w,h){
-  const ok=v.filter(x=>x!=null&&isFinite(x));
-  if(ok.length<2) return "";
-  const lo=Math.min(...ok),hi=Math.max(...ok),r=(hi-lo)||1;
-  let d="",up=false;
-  v.forEach((x,i)=>{ if(x==null||!isFinite(x)){up=false;return;}
-    const px=i/(v.length-1)*w, py=h-((x-lo)/r)*h;
-    d+=(up?"L":"M")+px.toFixed(1)+","+py.toFixed(1); up=true;});
-  return d;
-}
-
 function drawRail(){
   const el=document.getElementById("rail"); el.innerHTML="";
   const keys=MODEL.keys;
   const rest=MODEL.series.GEN?keys.slice(1):keys.slice();
-  if(S.sortYoy) rest.sort((a,b)=>{
-    const va=MODEL.series[a].yoy.at(-1), vb=MODEL.series[b].yoy.at(-1);
+  const campo={ytd:"dYtd",milei:"dMilei",ia:"dIa"}[S.sort];
+  if(campo) rest.sort((a,b)=>{
+    const va=MODEL.series[a][campo], vb=MODEL.series[b][campo];
     return (vb==null?-1e9:vb)-(va==null?-1e9:va);});
+  const cel=(v)=>`<span class="d ${v>0.049?'pos':v<-0.049?'neg':''}">${v==null?"":pf(v,1)}</span>`;
   (MODEL.series.GEN?["GEN",...rest]:rest).forEach(k=>{
     const s=MODEL.series[k], on=S.sec===k;
-    const y=s.yoy.at(-1);
     const b=document.createElement("button");
     b.type="button"; b.className="item"+(k==="GEN"?" gen":"");
     b.setAttribute("aria-current",on?"true":"false");
-    b.innerHTML=`<span class="cd">${k==="GEN"?"":k}</span>
-      <span class="nm">${s.name}</span>
-      <svg width="62" height="20" viewBox="0 0 62 20" aria-hidden="true">
-        <path d="${spark(s.tc.slice(ventana()),60,16)}" transform="translate(1,2)" fill="none"
-          stroke="${on?'#fff':'var(--serie)'}" stroke-width="1.4"
-          stroke-linejoin="round" stroke-linecap="round"/></svg>
-      <span class="yy ${y>0?'pos':y<0?'neg':''}" style="${on?'color:#fff':''}">${y==null?"—":pf(y,1)}</span>`;
+    b.innerHTML=`<span class="lead"><span class="cd">${k==="GEN"?"":k}</span><span class="nm">${s.name}</span></span>
+      ${cel(s.dYtd)}${cel(s.dMilei)}${cel(s.dIa)}`;
     b.onclick=()=>{S.sec=k; S.hover=null; render();};
     el.appendChild(b);
   });
+  document.querySelectorAll(".rail .head button").forEach(btn=>
+    btn.setAttribute("aria-pressed", btn.dataset.sort===(S.sort||"def")?"true":"false"));
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1258,7 +1545,7 @@ function seriesFor(key){
 
 function render(){
   const s=MODEL.series[S.sec];
-  document.getElementById("secCode").textContent=S.sec==="GEN"?"EMAE":S.sec;
+  document.getElementById("secCode").textContent=S.sec==="GEN"?T.emae:S.sec;
   document.getElementById("secName").textContent=s.name;
   document.querySelectorAll(".seg [data-serie]").forEach(b=>
     b.setAttribute("aria-pressed", b.dataset.serie===S.serie?"true":"false"));
@@ -1282,15 +1569,15 @@ function drawReadout(){
     return (a/b-1)*100;})();
   const cls=v=>v>0.05?"pos":v<-0.05?"neg":"";
   document.getElementById("readout").innerHTML=`
-    <div class="kpi"><div class="lab">Índice tendencia-ciclo ${etiqueta(i)}</div>
-      <div class="val">${nf(tc[i],1)} <small>2004=100</small></div></div>
-    <div class="kpi"><div class="lab">Tendencia-ciclo vs. mes anterior</div>
+    <div class="kpi"><div class="lab">${T.kpiIndex} ${etiqueta(i)}</div>
+      <div class="val">${nf(tc[i],1)} <small>${T.base100}</small></div></div>
+    <div class="kpi"><div class="lab">${T.kpiTc}</div>
       <div class="val ${cls(mm)}">${pf(mm,1)}</div></div>
-    <div class="kpi"><div class="lab">Desestacionalizada vs. mes anterior</div>
+    <div class="kpi"><div class="lab">${T.kpiSa}</div>
       <div class="val ${cls(mmsa)}">${pf(mmsa,1)}</div></div>
-    <div class="kpi"><div class="lab">Serie original vs. igual mes del año anterior</div>
+    <div class="kpi"><div class="lab">${T.kpiIa}</div>
       <div class="val ${cls(yy)}">${pf(yy,1)}</div></div>
-    ${acum==null?"":`<div class="kpi"><div class="lab">Acumulado del año</div>
+    ${acum==null?"":`<div class="kpi"><div class="lab">${T.kpiAcum}</div>
       <div class="val ${cls(acum)}">${pf(acum,1)}</div></div>`}`;
 }
 
@@ -1430,27 +1717,27 @@ function drawCross(){
 
 function drawLegend(){
   const s=MODEL.series[S.sec], out=[];
-  const nom={tc:"Tendencia-ciclo",sa:"Serie desestacionalizada",orig:"Serie original",yoy:"Variación interanual"}[S.serie];
+  const nom={tc:T.lgTc,sa:T.lgSa,orig:T.lgOrig,yoy:T.lgYoy}[S.serie];
   out.push(`<span><i class="swatch" style="border-color:var(--serie)"></i>${nom} · ${s.name}${
-    (S.serie==="tc"||S.serie==="sa")&&!s.oficial?" (cálculo propio)":" (INDEC)"}</span>`);
+    (S.serie==="tc"||S.serie==="sa")&&!s.oficial?T.lgOwn:T.lgIndec}</span>`);
   if(S.serie==="tc"||S.serie==="sa")
-    out.push(`<span><i class="swatch" style="border-color:var(--orig)"></i>Serie original</span>`);
+    out.push(`<span><i class="swatch" style="border-color:var(--orig)"></i>${T.lgOrigShort}</span>`);
   if(S.cmp&&S.sec!=="GEN"&&MODEL.series.GEN)
-    out.push(`<span><i class="swatch" style="border-color:var(--ref);border-top-style:dashed"></i>EMAE nivel general</span>`);
-  if(S.pres) out.push(`<span><i class="swatch" style="border-color:var(--ink2);border-top-style:dashed"></i>Asunción presidencial</span>`);
-  if(S.serie==="tc") out.push(`<span style="color:var(--ink3)">Franja gris: meses sujetos a revisión</span>`);
+    out.push(`<span><i class="swatch" style="border-color:var(--ref);border-top-style:dashed"></i>${T.genName}</span>`);
+  if(S.pres) out.push(`<span><i class="swatch" style="border-color:var(--ink2);border-top-style:dashed"></i>${T.lgPres}</span>`);
+  if(S.serie==="tc") out.push(`<span style="color:var(--ink3)">${T.lgBand}</span>`);
   document.getElementById("legend").innerHTML=out.join("");
 }
 
 function drawHover(){
   const el=document.getElementById("hover");
   const i=S.hover==null?MODEL.n-1:S.hover, s=MODEL.series[S.sec];
-  const pre=S.hover==null?"Último dato · ":"";
+  const pre=S.hover==null?T.hvLast:"";
   el.innerHTML=`<span>${pre}<b>${etiqueta(i)}</b></span>
-    <span>Tendencia-ciclo <b>${nf(s.tc[i],1)}</b></span>
-    <span>Desestacionalizada <b>${nf(s.sa[i],1)}</b></span>
-    <span>Original <b>${nf(s.orig[i],1)}</b></span>
-    <span>Var. i.a. <b>${s.yoy[i]==null?"—":pf(s.yoy[i],1)}</b></span>`;
+    <span>${T.hvTc} <b>${nf(s.tc[i],1)}</b></span>
+    <span>${T.hvSa} <b>${nf(s.sa[i],1)}</b></span>
+    <span>${T.hvOrig} <b>${nf(s.orig[i],1)}</b></span>
+    <span>${T.hvIa} <b>${s.yoy[i]==null?"":pf(s.yoy[i],1)}</b></span>`;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1463,21 +1750,23 @@ document.querySelectorAll(".seg [data-rango]").forEach(b=>
 document.getElementById("cmpChk").onchange=e=>{S.cmp=e.target.checked; render();};
 document.getElementById("baseChk").onchange=e=>{S.base=e.target.checked; render();};
 document.getElementById("presChk").onchange=e=>{S.pres=e.target.checked; render();};
-document.getElementById("sortBtn").onclick=e=>{S.sortYoy=!S.sortYoy;
-  e.target.textContent=S.sortYoy?"orden del informe":"ordenar por i.a."; drawRail();};
+document.querySelectorAll(".rail .head button").forEach(btn=>
+  btn.onclick=()=>{ const s=btn.dataset.sort;
+    S.sort = (s==="def"||S.sort===s) ? null : s;   // volver a tocar la misma columna, o "Sector", deja el orden del informe
+    drawRail(); });
 
 function mostrarAjuste(){
   const f=MODEL.fit;
-  document.getElementById("fitMaeN").textContent=f.maeN==null?"—":nf(f.maeN,2);
-  document.getElementById("fitMae").textContent=f.mae==null?"—":nf(f.mae,2);
-  document.getElementById("fitMax").textContent=f.mx==null?"—":nf(f.mx,1)+" puntos";
+  const eN=document.getElementById("fitMaeN"), e1=document.getElementById("fitMae"), eX=document.getElementById("fitMax");
+  if(eN) eN.textContent=f.maeN==null?"—":nf(f.maeN,2);
+  if(e1) e1.textContent=f.mae==null?"—":nf(f.mae,2);
+  if(eX) eX.textContent=f.mx==null?"—":nf(f.mx,1)+T.pts;
 }
 
+document.getElementById("langBtn").onclick=()=>applyLang(LANG==="es"?"en":"es");
+
 build();
-document.getElementById("stampDate").textContent=etiqueta(MODEL.n-1).toLowerCase();
-document.getElementById("stampRange").textContent=MODEL.n+" meses desde "+etiqueta(0).toLowerCase();
-mostrarAjuste();
-render();
+applyLang("es");   // fija todos los textos, sellos de fecha, ajuste y hace el primer render
 let rt; addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(drawChart,120);});
 </script>
 </body>
